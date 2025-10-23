@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { Easing, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import { Fa7BrandsTwitterSquare, LucideArrowRight } from "../svgs/arrow";
 
 const WINDOW_SIZE = 150;
 const checkpoint = 2 * WINDOW_SIZE;
@@ -12,20 +13,32 @@ export default function Ebay() {
 
 	return (
 		<div style={{ width, height }} className="bg-yellow-500">
-			<Text text="Sports" index={0} />
-			<Text text="Fashion" index={1} />
-			<Text text="Home" index={2} />
-			<Text text="Collectibles" index={3} />
-			<Text text="Garden" index={4} />
-			<Text text="Toys" index={5} />
-			<Text text="Motors" index={6} />
-			<Text text="Refurbished" index={7} />
-			<Text text="Antiques" index={8} />
-			<Text text="Comic" index={9} />
-
-			<div className="text-8xl absolute top-[33%] left-10 text-yellow-950">
-				🡪
+			<div className="relative top-[5rem]">
+				<Text text="Sports" index={0} />
+				<Text text="Fashion" index={1} />
+				<Text text="Home" index={2} />
+				<Text text="Collectibles" index={3} />
+				<Text text="Garden" index={4} />
+				<Text text="Toys" index={5} />
+				<Text text="Motors" index={6} />
+				<Text text="Refurbished" index={7} />
+				<Text text="Antiques" index={8} />
+				<Text text="Comic" index={9} />
 			</div>
+
+			<div className="text-8xl absolute top-[41%] left-10 text-yellow-950">
+				<LucideArrowRight />
+			</div>
+
+			<div className="bg-yellow-500 text-[3rem] z-10 text-white relative .border-b h-24 px-10 py-4 flex gap-4 justify-between">
+				<div className="flex gap-2 items-center font-black text-yellow-900">
+					<Fa7BrandsTwitterSquare className="w-15" />
+					_yogr
+				</div>
+
+				<div className="font-bold text-yellow-800 text-[2.5rem]">motion.1</div>
+			</div>
+			<div className="bg-gradient-to-b from-yellow-500 to-transparent z-10 text-white relative .border-b h-32" />
 			{/*
 			<DebugLine top={l1} />
 			<DebugLine top={mid} className="!border-green-500" />
@@ -70,7 +83,7 @@ function Text({ text, index }: TextProps) {
 				className={clsx("absolute text-9xl font-bold p-10 text-yellow-950")}
 				style={{
 					top: p,
-					left: l * 130,
+					left: l * 100,
 					opacity:
 						p < checkpoint
 							? Math.max(0.3, Math.abs(p / checkpoint))
