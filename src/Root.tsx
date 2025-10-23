@@ -1,9 +1,9 @@
-import "./index.css";
+/** biome-ignore-all lint/correctness/useUniqueElementIds: doesn't apply here */
 import { Composition } from "remotion";
+import Ebay from "./compositions/ebay-things-people-love";
 import { HelloWorld, myCompSchema } from "./HelloWorld";
 import { Logo, myCompSchema2 } from "./HelloWorld/Logo";
-
-// Each <Composition> is an entry in the sidebar!
+import "./index.css";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -42,6 +42,8 @@ export const RemotionRoot: React.FC = () => {
           logoColor2: "#86A8E7" as const,
         }}
       />
+
+      <Composition id="Ebay" component={Ebay} durationInFrames={9 * 60} fps={60} width={1080} height={1080} />
     </>
   );
 };
