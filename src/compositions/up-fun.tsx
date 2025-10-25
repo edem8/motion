@@ -27,7 +27,7 @@ export function UpFun() {
 }
 
 const SPEED = 15;
-function RollBlindsUp() {
+export function RollBlindsUp() {
 	const { width, height, fps } = useVideoConfig();
 	const frame = useCurrentFrame();
 
@@ -221,22 +221,6 @@ function Eyes() {
 				<path d="M0 4 L0 40 L20 40 L20 0 Z" className="fill-white" />
 			</g>
 		</svg>
-	);
-}
-
-function EyesBlink() {
-	return (
-		<div className="w-[17rem]">
-			<svg viewBox="0 0 60 40" className="w-full">
-				<title>eyes</title>
-				<g>
-					<path d="M0 0 L0 40 L20 40 L20 3 Z" className="fill-white" />
-				</g>
-				<g transform="translate(30, 0)">
-					<path d="M0 4 L0 40 L20 40 L20 0 Z" className="fill-white" />
-				</g>
-			</svg>
-		</div>
 	);
 }
 
