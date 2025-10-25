@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { Easing, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import { linearMap } from "../lib/linear-map";
 import { Fa7BrandsTwitterSquare, LucideArrowRight } from "../svgs/arrow";
 
 const WINDOW_SIZE = 150;
@@ -95,14 +96,4 @@ function Text({ text, index }: TextProps) {
 			{/* {text === "Home" && <DebugLine top={p} className="!border-slate-500" />} */}
 		</>
 	);
-}
-
-function linearMap(
-	x: number,
-	inMin: number,
-	inMax: number,
-	outMin: number,
-	outMax: number,
-) {
-	return ((x - inMin) / (inMax - inMin)) * (outMax - outMin) + outMin;
 }
