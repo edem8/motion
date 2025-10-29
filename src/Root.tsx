@@ -10,9 +10,9 @@ export const RemotionRoot: React.FC = () => {
       <Composition
         id="MoveAnimate"
         component={MoveAnimation}
-        durationInFrames={80}
+        durationInFrames={5 * 60}
         fps={60}
-        width={1080}
+        width={720}
         height={1080}
       />
     </Folder>
