@@ -3,6 +3,7 @@ import {
   interpolate,
   Sequence,
   Series,
+  spring,
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
@@ -16,7 +17,7 @@ export function MoveAnimation() {
         <RollBlindsUp />
       </Series.Sequence>
 
-      <Series.Sequence name="Logo" durationInFrames={fps * 2}>
+      <Series.Sequence name="Logo" durationInFrames={fps * 3}>
         <Logo />
       </Series.Sequence>
     </Series>
@@ -48,7 +49,7 @@ export function RollBlindsUp() {
 
   return (
     <div className="bg-black" style={{ width, height }}>
-      <div className="flex flex-1 items-end h-full w-full">
+      <div className="flex flex-1 items-start h-full w-full">
         {heights.map((height, i) => (
           <div
             // biome-ignore lint/suspicious/noArrayIndexKey: hargh
@@ -66,47 +67,45 @@ function Logo() {
   const { fps } = useVideoConfig();
 
   return (
-    <Sequence name=" Bounce In" durationInFrames={fps * 2}>
+    <Sequence name=" Bounce In" durationInFrames={fps * 3}>
       <LogoBounceAnimation />
     </Sequence>
   );
 }
+
 export function LogoBounceAnimation() {
   const frame = useCurrentFrame();
   const { fps, width, height } = useVideoConfig();
 
-  // Goggles animation
-  const opacity = interpolate(frame, [0, fps / 2], [0, 1], {
-    easing: Easing.ease,
-    extrapolateRight: "clamp",
+  // logo ---
+  const bounceProgress = spring({
+    frame,
+    fps,
+    config: {
+      damping: 5,
+      stiffness: 80,
+      mass: 0.5,
+    },
   });
 
-  const bounceY = interpolate(frame, [0, fps * 1.5], [0, -30], {
-    easing: Easing.bounce,
-    extrapolateRight: "clamp",
-  });
+  const bounceY = interpolate(bounceProgress, [0, 1], [0, 15]);
+  const scale = interpolate(bounceProgress, [0, 0.4, 1], [0.8, 0.9, 0.8]);
 
-  const scale = interpolate(frame, [0, fps / 2, fps], [0.8, 0.9, 0.8], {
+  //Ball movement
+
+  const ballDelay = fps * 1;
+  const delayedFrame = Math.max(0, frame - ballDelay);
+
+  const moveX = interpolate(delayedFrame, [0, fps * 1], [10, 105], {
     easing: Easing.out(Easing.ease),
     extrapolateRight: "clamp",
   });
 
-  // Ball animation
-  const moveX = interpolate(frame, [0, fps * 1.5], [80, 100], {
-    easing: Easing.out(Easing.ease),
+  const rotate = interpolate(delayedFrame, [0, fps * 1.5], [0, 720], {
     extrapolateRight: "clamp",
   });
 
-  const moveY = interpolate(frame, [0, fps * 1], [0, 10], {
-    easing: Easing.out(Easing.bounce),
-    extrapolateRight: "clamp",
-  });
-
-  const rotate = interpolate(frame, [0, fps * 1.5], [0, 720], {
-    extrapolateRight: "clamp",
-  });
-
-  const ballOpacity = interpolate(frame, [0, fps / 3], [0, 1], {
+  const ballOpacity = interpolate(delayedFrame, [0, fps / 2], [0, 1], {
     easing: Easing.ease,
     extrapolateRight: "clamp",
   });
@@ -120,10 +119,10 @@ export function LogoBounceAnimation() {
       <div
         style={{
           position: "absolute",
-          top: "40%",
+          top: "35%",
           left: "30%",
+          transformOrigin: "center center",
           transform: `translateY(${bounceY}px) scale(${scale})`,
-          opacity,
         }}
       >
         <svg
@@ -152,7 +151,7 @@ export function LogoBounceAnimation() {
           height: 40,
           borderRadius: "50%",
           backgroundColor: "white",
-          transform: `translate(-50%, -50%) translateX(${moveX}px)  translateX(${moveY}px)   rotate(${rotate}deg)`,
+          transform: `translate(-50%, -50%) translateX(${moveX}px) rotate(${rotate}deg)`,
           opacity: ballOpacity,
           zIndex: 2,
         }}
