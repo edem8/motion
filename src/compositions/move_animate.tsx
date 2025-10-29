@@ -96,7 +96,7 @@ export function LogoBounceAnimation() {
   const ballDelay = fps * 1;
   const delayedFrame = Math.max(0, frame - ballDelay);
 
-  const moveX = interpolate(delayedFrame, [0, fps * 1], [5, 100], {
+  const moveX = interpolate(delayedFrame, [0, fps * 1], [5, 120], {
     easing: Easing.out(Easing.ease),
     extrapolateRight: "clamp",
   });
@@ -119,16 +119,16 @@ export function LogoBounceAnimation() {
       <div
         style={{
           position: "absolute",
-          top: "35%",
-          left: "35%",
+          top: "30%",
+          left: "30%",
           transformOrigin: "center center",
           transform: `translateY(${bounceY}px) scale(${scale})`,
         }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="250"
-          height="250"
+          width="350"
+          height="350"
           viewBox="0 0 24 24"
           fill="white"
           stroke="#1424EA"
@@ -147,8 +147,8 @@ export function LogoBounceAnimation() {
           position: "absolute",
           top: "50%",
           left: "50%",
-          width: 40,
-          height: 40,
+          width: 60,
+          height: 60,
           borderRadius: "50%",
           backgroundColor: "white",
           transform: `translate(-50%, -50%) translateX(${moveX}px) rotate(${rotate}deg)`,
