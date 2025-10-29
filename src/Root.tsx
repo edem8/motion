@@ -12,7 +12,7 @@ export const RemotionRoot: React.FC = () => {
         component={MoveAnimation}
         durationInFrames={5 * 60}
         fps={60}
-        width={720}
+        width={1080}
         height={1080}
       />
     </Folder>

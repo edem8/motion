@@ -88,7 +88,7 @@ export function LogoBounceAnimation() {
     },
   });
 
-  const bounceY = interpolate(bounceProgress, [0, 1], [0, 15]);
+  const bounceY = interpolate(bounceProgress, [0, 1], [0, 16]);
   const scale = interpolate(bounceProgress, [0, 0.4, 1], [0.8, 0.9, 0.8]);
 
   //Ball movement
@@ -96,7 +96,7 @@ export function LogoBounceAnimation() {
   const ballDelay = fps * 1;
   const delayedFrame = Math.max(0, frame - ballDelay);
 
-  const moveX = interpolate(delayedFrame, [0, fps * 1], [10, 105], {
+  const moveX = interpolate(delayedFrame, [0, fps * 1], [5, 100], {
     easing: Easing.out(Easing.ease),
     extrapolateRight: "clamp",
   });
@@ -105,7 +105,7 @@ export function LogoBounceAnimation() {
     extrapolateRight: "clamp",
   });
 
-  const ballOpacity = interpolate(delayedFrame, [0, fps / 2], [0, 1], {
+  const ballOpacity = interpolate(delayedFrame, [0, fps / 3], [0, 1], {
     easing: Easing.ease,
     extrapolateRight: "clamp",
   });
@@ -120,7 +120,7 @@ export function LogoBounceAnimation() {
         style={{
           position: "absolute",
           top: "35%",
-          left: "30%",
+          left: "35%",
           transformOrigin: "center center",
           transform: `translateY(${bounceY}px) scale(${scale})`,
         }}
