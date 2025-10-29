@@ -12,12 +12,10 @@ export function MoveAnimation() {
 
   return (
     <Series>
-      {/* Step 1: Roll blinds */}
       <Series.Sequence name="Roll Blinds Up" durationInFrames={fps * 1}>
         <RollBlindsUp />
       </Series.Sequence>
 
-      {/* Step 2: Logo animation */}
       <Series.Sequence name="Logo" durationInFrames={fps * 2}>
         <Logo />
       </Series.Sequence>
@@ -77,6 +75,7 @@ export function LogoBounceAnimation() {
   const frame = useCurrentFrame();
   const { fps, width, height } = useVideoConfig();
 
+  // Goggles animation
   const opacity = interpolate(frame, [0, fps / 2], [0, 1], {
     easing: Easing.ease,
     extrapolateRight: "clamp",
@@ -98,18 +97,15 @@ export function LogoBounceAnimation() {
     extrapolateRight: "clamp",
   });
 
-  // Slight downward movement (adds depth)
   const moveY = interpolate(frame, [0, fps * 1], [0, 10], {
     easing: Easing.out(Easing.bounce),
     extrapolateRight: "clamp",
   });
 
-  // Rotation for "rolling" illusion
   const rotate = interpolate(frame, [0, fps * 1.5], [0, 720], {
     extrapolateRight: "clamp",
   });
 
-  // Smooth fade in
   const ballOpacity = interpolate(frame, [0, fps / 3], [0, 1], {
     easing: Easing.ease,
     extrapolateRight: "clamp",
